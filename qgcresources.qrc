@@ -108,4 +108,15 @@
     <qresource prefix="/opengl">
         <file>resources/opengl/buglist.json</file>
     </qresource>
+    <qresource prefix="soleonIcons">
+        <file alias="logo1.svg">resources/soleonIcons/logo1.svg</file>
+        <file alias="logo_nobackground.svg">resources/soleonIcons/logo_nobackground.svg</file>
+        <file alias="tank_fill_100.svg">resources/soleonIcons/tank_fill_100.svg</file>
+        <file alias="tank_fill_50.svg">resources/soleonIcons/tank_fill_50.svg</file>
+        <file alias="tank_outline.svg">resources/soleonIcons/tank_outline.svg</file>
+        <file alias="logo2.svg">resources/soleonIcons/logo2.svg</file>
+        <file alias="logo.svg">resources/soleonIcons/logo.svg</file>
+        <file alias="tank_fill_25.svg">resources/soleonIcons/tank_fill_25.svg</file>
+        <file alias="tank_fill_75.svg">resources/soleonIcons/tank_fill_75.svg</file>
+    </qresource>
 </RCC>

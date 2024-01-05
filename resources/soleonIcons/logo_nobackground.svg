@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f27535;
+      }
+
+      .cls-2 {
+        fill: none;
+        opacity: .6;
+      }
+    </style>
+  </defs>
+  <g id="Fondo_Toolbar" data-name="Fondo Toolbar">
+    <g>
+      <rect class="cls-2" width="80" height="80"/>
+      <polygon class="cls-1" points="65 25.05 65 15 15 15 15 20.5 15 25.05 15 35.06 15 39.61 15 45.03 54.04 45.03 54.04 55.04 15 55.04 15 65 65 65 65 59.8 65 55.04 65 45.03 65 40.69 65 35.06 25.96 35.06 25.96 25.05 65 25.05"/>
+    </g>
+  </g>
+</svg>
