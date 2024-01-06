@@ -50,6 +50,7 @@
 #include "TerrainQuery.h"
 #include "StandardModes.h"
 #include "VehicleGeneratorFactGroup.h"
+#include "VehicleSprayerFactGroup.h"
 #include "VehicleEFIFactGroup.h"
 
 class Actuators;
@@ -326,6 +327,7 @@ public:
     Q_PROPERTY(FactGroup*           localPositionSetpoint READ localPositionSetpointFactGroup CONSTANT)
     Q_PROPERTY(FactGroup*           hygrometer      READ hygrometerFactGroup        CONSTANT)
     Q_PROPERTY(FactGroup*           generator       READ generatorFactGroup         CONSTANT)
+    Q_PROPERTY(FactGroup*           sprayer         READ sprayerFactGroup         CONSTANT)
     Q_PROPERTY(FactGroup*           efi             READ efiFactGroup               CONSTANT)
     Q_PROPERTY(QmlObjectListModel*  batteries       READ batteries                  CONSTANT)
     Q_PROPERTY(Actuators*           actuators       READ actuators                  CONSTANT)
@@ -720,6 +722,7 @@ public:
     FactGroup* terrainFactGroup             () { return &_terrainFactGroup; }
     FactGroup* hygrometerFactGroup          () { return &_hygrometerFactGroup; }
     FactGroup* generatorFactGroup           () { return &_generatorFactGroup; }
+    FactGroup* sprayerFactGroup             () { return &_sprayerFactGroup  ; }
     FactGroup* efiFactGroup                 () { return &_efiFactGroup; }
     QmlObjectListModel* batteries           () { return &_batteryFactGroupListModel; }
 
@@ -1427,6 +1430,7 @@ private:
     VehicleEstimatorStatusFactGroup _estimatorStatusFactGroup;
     VehicleHygrometerFactGroup      _hygrometerFactGroup;
     VehicleGeneratorFactGroup       _generatorFactGroup;
+    VehicleSprayerFactGroup         _sprayerFactGroup;
     VehicleEFIFactGroup             _efiFactGroup;
     TerrainFactGroup                _terrainFactGroup;
     QmlObjectListModel              _batteryFactGroupListModel;
@@ -1487,6 +1491,7 @@ private:
     static const char* _estimatorStatusFactGroupName;
     static const char* _hygrometerFactGroupName;
     static const char* _generatorFactGroupName;
+    static const char* _sprayerFactGroupName;
     static const char* _efiFactGroupName;
     static const char* _terrainFactGroupName;
 

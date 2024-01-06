@@ -1,0 +1,53 @@
+{
+    "version":              1,
+    "fileType":             "FactMetaData",
+    "QGC.MetaData.Facts":
+[
+{
+    "name":             "filllevel",
+    "shortDesc":        "Fill Level",
+    "type":             "float",
+    "decimalPlaces":    2,
+    "units":            "L"
+},
+{
+    "name":             "flowliter",
+    "shortDesc":        "Flow L/Min",
+    "type":             "float",
+    "decimalPlaces":    1,
+    "units":            "L/Min"
+},
+{
+    "name":             "flowha",
+    "shortDesc":        "Flow L/ha",
+    "type":             "float",
+    "decimalPlaces":    2,
+    "units":            "L/ha"
+},
+{
+    "name":             "distlines",
+    "shortDesc":        "Distance between lines m",
+    "type":             "float",
+    "decimalPlaces":    1,
+    "units":            "m"
+},
+{
+    "name":             "speed",
+    "shortDesc":        "Flight speed mission",
+    "type":             "float",
+    "decimalPlaces":    1,
+    "units":            "m/s"
+},
+{
+    "name":             "status",
+    "shortDesc":        "Sprayer status bitfield",
+    "type":             "uint8",
+    "units":            "bitfield"
+},
+{
+    "name":             "statusText",
+    "shortDesc":        "Spayer status",
+    "type":             "string"
+}
+]
+}
