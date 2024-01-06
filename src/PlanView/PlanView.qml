@@ -858,6 +858,7 @@ Item {
         ColumnLayout {
             id:         columnHolder
             spacing:    _margin
+            width:      createPlanGridLayout.childrenRect.width
 
             property string _overwriteText: qsTr("Plan overwrite")
 
@@ -879,6 +880,7 @@ Item {
             }
 
             GridLayout {
+                id:                 createPlanGridLayout
                 columns:            2
                 columnSpacing:      _margin
                 rowSpacing:         _margin
@@ -890,7 +892,7 @@ Item {
 
                     Rectangle {
                         id:     button
-                        width:  ScreenTools.defaultFontPixelHeight * 7
+                        width:  ScreenTools.defaultFontPixelHeight * 4
                         height: planCreatorNameLabel.y + planCreatorNameLabel.height
                         color:  button.pressed || button.highlighted ? qgcPal.buttonHighlight : qgcPal.button
 
@@ -914,6 +916,7 @@ Item {
                             anchors.right:          parent.right
                             horizontalAlignment:    Text.AlignHCenter
                             text:                   object.name
+                            font.pointSize:         ScreenTools.smallFontPointSize
                             color:                  button.pressed || button.highlighted ? qgcPal.buttonHighlightText : qgcPal.buttonText
                         }
 
@@ -956,6 +959,7 @@ Item {
                     text:               qsTr("Open...")
                     Layout.fillWidth:   true
                     enabled:            !_planMasterController.syncInProgress
+                    pointSize:          ScreenTools.smallFontPointSize
                     onClicked: {
                         dropPanel.hide()
                         if (_planMasterController.dirty) {
@@ -970,6 +974,7 @@ Item {
                     text:               qsTr("Save")
                     Layout.fillWidth:   true
                     enabled:            !_planMasterController.syncInProgress && _planMasterController.currentPlanFile !== ""
+                    pointSize:          ScreenTools.smallFontPointSize
                     onClicked: {
                         dropPanel.hide()
                         if(_planMasterController.currentPlanFile !== "") {
@@ -984,6 +989,7 @@ Item {
                     text:               qsTr("Save As...")
                     Layout.fillWidth:   true
                     enabled:            !_planMasterController.syncInProgress && _planMasterController.containsItems
+                    pointSize:          ScreenTools.smallFontPointSize
                     onClicked: {
                         dropPanel.hide()
                         _planMasterController.saveToSelectedFile()
@@ -995,6 +1001,7 @@ Item {
                     Layout.fillWidth:   true
                     text:               qsTr("Save Mission Waypoints As KML...")
                     enabled:            !_planMasterController.syncInProgress && _visualItems.count > 1
+                    pointSize:          ScreenTools.smallFontPointSize
                     onClicked: {
                         // First point does not count
                         if (_visualItems.count < 2) {
@@ -1023,6 +1030,7 @@ Item {
                     Layout.fillWidth:   true
                     enabled:            !_planMasterController.offline && !_planMasterController.syncInProgress && _planMasterController.containsItems
                     visible:            !QGroundControl.corePlugin.options.disableVehicleConnection
+                    pointSize:          ScreenTools.smallFontPointSize
                     onClicked: {
                         dropPanel.hide()
                         _planMasterController.upload()
@@ -1034,6 +1042,7 @@ Item {
                     Layout.fillWidth:   true
                     enabled:            !_planMasterController.offline && !_planMasterController.syncInProgress
                     visible:            !QGroundControl.corePlugin.options.disableVehicleConnection
+                    pointSize:          ScreenTools.smallFontPointSize
 
                     onClicked: {
                         dropPanel.hide()
@@ -1047,6 +1056,7 @@ Item {
                     Layout.columnSpan:  2
                     enabled:            !_planMasterController.offline && !_planMasterController.syncInProgress
                     visible:            !QGroundControl.corePlugin.options.disableVehicleConnection
+                    pointSize:          ScreenTools.smallFontPointSize
                     onClicked: {
                         dropPanel.hide()
                         clearButtonClicked()
