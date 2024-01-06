@@ -621,9 +621,27 @@ Item {
             anchors.right:      parent.right
             anchors.rightMargin: _toolsMargin
         }
+        // Button to hide right panel controls
+        // ------------------------------------------------------
+        QGCButton {
+            anchors.top:        rightPanel.top
+            anchors.right:      rightPanelItems.visible ? rightPanel.left : parent.right
+            anchors.margins:    ScreenTools.defaultFontPixelWidth
+            anchors.topMargin:  _toolsMargin
+            text:               rightPanelItems.visible ? ">" : "<"
+            opacity:            0.5
+
+            width:              height
+            height:             layerTabBar.height
+
+            onClicked: {
+                rightPanelItems.visible = !rightPanelItems.visible
+            }
+        }
         //-------------------------------------------------------
         // Right Panel Controls
         Item {
+            id:                     rightPanelItems
             anchors.fill:           rightPanel
             anchors.topMargin:      _toolsMargin
             DeadMouseArea {
