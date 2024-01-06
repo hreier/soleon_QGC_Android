@@ -172,6 +172,9 @@ DECLARE_SETTINGSFACT(AppSettings, forwardMavlink)
 DECLARE_SETTINGSFACT(AppSettings, forwardMavlinkHostName)
 DECLARE_SETTINGSFACT(AppSettings, forwardMavlinkAPMSupportHostName)
 
+// Soleon
+DECLARE_SETTINGSFACT(AppSettings, hidePhotoVideoControl)
+
 DECLARE_SETTINGSFACT_NO_FUNC(AppSettings, indoorPalette)
 {
     if (!_indoorPaletteFact) {

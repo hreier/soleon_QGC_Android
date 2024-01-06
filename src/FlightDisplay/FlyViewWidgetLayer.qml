@@ -137,6 +137,8 @@ Item {
 
         property real rightEdgeCenterInset: visible ? parent.width - x : 0
 
+        visible:                !QGroundControl.settingsManager.appSettings.hidePhotoVideoControl.rawValue
+
         state:                  _verticalCenter ? "verticalCenter" : "topAnchor"
         states: [
             State {

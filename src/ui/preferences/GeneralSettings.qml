@@ -196,6 +196,12 @@ Rectangle {
                                 property Fact _enableCustomActions: QGroundControl.settingsManager.flyViewSettings.enableCustomActions
                             }
 
+                            FactCheckBox {
+                                text:       qsTr("Hide Photo/Video control widget")
+                                visible:    QGroundControl.settingsManager.appSettings.hidePhotoVideoControl.visible
+                                fact:       QGroundControl.settingsManager.appSettings.hidePhotoVideoControl
+                            }
+
                             //-----------------------------------------------------------------
                             //-- CustomAction definition path
                             GridLayout {
