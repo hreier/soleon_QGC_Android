@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -18,6 +18,7 @@
 #include "QGCSerialPortInfo.h"
 #endif
 
+#include "TTYSLink.h"
 #include "LinkManager.h"
 #include "QGCApplication.h"
 #include "UDPLink.h"
@@ -49,6 +50,7 @@ QGC_LOGGING_CATEGORY(LinkManagerVerboseLog, "LinkManagerVerboseLog")
 const char* LinkManager::_defaultUDPLinkName =                  "UDP Link (AutoConnect)";
 const char* LinkManager::_mavlinkForwardingLinkName =           "MAVLink Forwarding Link";
 const char* LinkManager::_mavlinkForwardingSupportLinkName =    "MAVLink Support Forwarding Link";
+const char* LinkManager::_defaultTTYSLinkName =                 "TTYS Link (AutoConnect:Anroid_QV450)";
 
 const int LinkManager::_autoconnectUpdateTimerMSecs =   1000;
 #ifdef Q_OS_WIN
@@ -116,6 +118,9 @@ bool LinkManager::createConnectedLink(SharedLinkConfigurationPtr& config, bool i
 #ifndef NO_SERIAL_LINK
     case LinkConfiguration::TypeSerial:
         link = std::make_shared<SerialLink>(config, isPX4Flow);
+        break;
+    case LinkConfiguration::TypeTtys:
+        link = std::make_shared<TTYSLink>(config, isPX4Flow);
         break;
 #else
     Q_UNUSED(isPX4Flow)
@@ -194,6 +199,17 @@ SharedLinkInterfacePtr LinkManager::mavlinkForwardingSupportLink()
         }
     }
 
+    return nullptr;
+}
+
+SharedLinkInterfacePtr LinkManager::mavlinkTtysLink()
+{
+    for (auto& link : _rgLinks) {
+        SharedLinkConfigurationPtr linkConfig = link->linkConfiguration();
+        if (linkConfig->type() == LinkConfiguration::TypeTtys && linkConfig->name() == _defaultTTYSLinkName) {
+            return link;
+        }
+    }
     return nullptr;
 }
 
@@ -317,6 +333,9 @@ void LinkManager::loadLinkConfigurationList()
                                 link = new SerialConfiguration(name);
                                 break;
 #endif
+                            case LinkConfiguration::TypeTtys:
+                                link = new TtysConfiguration(name);
+                                break;
                             case LinkConfiguration::TypeUdp:
                                 link = new UDPConfiguration(name);
                                 break;
@@ -499,6 +518,31 @@ void LinkManager::_addZeroConfAutoConnectLink(void)
     });
 }
 
+void   LinkManager::_addTTYSLinkAutoConnect     (void)
+{
+/************科维QV450的串口设备自动连接接口******************/
+#ifdef __android__
+        bool foundTTYSLink = false;
+        for (int i=0; i<_rgLinks.count(); i++) {
+            SharedLinkConfigurationPtr linkConfig = _rgLinks[i]->linkConfiguration();
+            if (linkConfig->type() == LinkConfiguration::TypeTtys && linkConfig->name() == _defaultTTYSLinkName) {
+                foundTTYSLink = true;
+                // TODO: should we check if the host/port matches the mavlinkForwardHostName setting and update if it does not match?
+                break;
+            }
+        }
+        if(!foundTTYSLink)
+        {
+            qCDebug(LinkManagerLog) << "New auto-connect TTYS LINK  added";
+            //-- Default UDPConfiguration is set up for autoconnect
+            TtysConfiguration* ttysConfig = new TtysConfiguration(_defaultTTYSLinkName);
+            ttysConfig->setDevFile("/dev/ttyHS0");
+            SharedLinkConfigurationPtr config = addConfiguration(ttysConfig);
+            createConnectedLink(config);
+        }
+ #endif
+}
+
 void LinkManager::_updateAutoConnectLinks(void)
 {
     if (_connectionsSuspended || qgcApp()->runningUnitTests()) {
@@ -508,6 +552,7 @@ void LinkManager::_updateAutoConnectLinks(void)
     _addUDPAutoConnectLink();
     _addMAVLinkForwardingLink();
     _addZeroConfAutoConnectLink();
+    _addTTYSLinkAutoConnect();
 
 #ifndef __mobile__
 #ifndef NO_SERIAL_LINK
@@ -689,6 +734,7 @@ QStringList LinkManager::linkTypeStrings(void) const
     {
 #ifndef NO_SERIAL_LINK
         list += tr("Serial");
+        list += tr("ttys");
 #endif
         list += tr("UDP");
         list += tr("TCP");

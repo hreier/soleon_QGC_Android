@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -110,6 +110,9 @@ public:
     /// Returns pointer to the mavlink support forwarding link, or nullptr if it does not exist
     SharedLinkInterfacePtr mavlinkForwardingSupportLink();
 
+    /// Returns pointer to the mavlink ttys link, or nullptr if it does not exist
+    SharedLinkInterfacePtr mavlinkTtysLink();
+    
     void disconnectAll(void);
 
 #ifdef QT_DEBUG
@@ -158,6 +161,7 @@ private:
     void                _addMAVLinkForwardingLink   (void);
     bool                _isSerialPortConnected      (void);
     void                _createDynamicForwardLink   (const char* linkName, QString hostName);
+    void                _addTTYSLinkAutoConnect     (void);
 
 #ifndef NO_SERIAL_LINK
     bool                _portAlreadyConnected       (const QString& portName);
@@ -199,6 +203,7 @@ private:
     static const char*  _defaultUDPLinkName;
     static const char*  _mavlinkForwardingLinkName;
     static const char*  _mavlinkForwardingSupportLinkName;
+    static const char*  _defaultTTYSLinkName;
     static const int    _autoconnectUpdateTimerMSecs;
     static const int    _autoconnectConnectDelayMSecs;
     bool                _mavlinkSupportForwardingEnabled = false;
