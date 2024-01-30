@@ -804,6 +804,7 @@ contains (DEFINES, QGC_ENABLE_PAIRING) {
 HEADERS += \
     src/comm/QGCSerialPortInfo.h \
     src/comm/SerialLink.h \
+    src/comm/TTYSLink.h
 }
 
 !MobileBuild {
@@ -1039,6 +1040,7 @@ SOURCES += \
 SOURCES += \
     src/comm/QGCSerialPortInfo.cc \
     src/comm/SerialLink.cc \
+    src/comm/TTYSLink.cc
 }
 
 contains(DEFINES, QGC_ENABLE_BLUETOOTH) {
