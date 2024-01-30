@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -11,6 +11,7 @@
 #ifndef NO_SERIAL_LINK
 #include "SerialLink.h"
 #endif
+#include "TTYSLink.h"
 #include "UDPLink.h"
 #include "TCPLink.h"
 #include "LogReplayLink.h"
@@ -73,6 +74,9 @@ LinkConfiguration* LinkConfiguration::createSettings(int type, const QString& na
         case LinkConfiguration::TypeSerial:
             config = new SerialConfiguration(name);
             break;
+        case LinkConfiguration::TypeTtys:
+            config = new TtysConfiguration(name);
+            break;
 #endif
         case LinkConfiguration::TypeUdp:
             config = new UDPConfiguration(name);
@@ -110,6 +114,9 @@ LinkConfiguration* LinkConfiguration::duplicateSettings(LinkConfiguration* sourc
             dupe = new SerialConfiguration(qobject_cast<SerialConfiguration*>(source));
             break;
 #endif
+        case TypeTtys:
+            dupe = new TtysConfiguration(qobject_cast<TtysConfiguration*>(source));
+            break;
         case TypeUdp:
             dupe = new UDPConfiguration(qobject_cast<UDPConfiguration*>(source));
             break;

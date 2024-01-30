@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  *
  * (c) 2009-2020 QGROUNDCONTROL PROJECT <http://www.qgroundcontrol.org>
  *
@@ -48,6 +48,7 @@ public:
 #ifndef NO_SERIAL_LINK
         TypeSerial,     ///< Serial Link
 #endif
+        TypeTtys,       ///< Serial Link android/Linux
         TypeUdp,        ///< UDP Link
         TypeTcp,        ///< TCP Link
 #ifdef QGC_ENABLE_BLUETOOTH
